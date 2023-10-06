@@ -1,12 +1,12 @@
 # Import required libraries and modules
 import tkinter as tk
 from tkinter import ttk
+import threading
+import time
 import datetime
 import pyautogui
 import logging
-import subprocess
-import platform
-import threading
+import ctypes  # For preventing Windows from going to sleep
 
 # Initialize logging for debugging and tracking
 def init_logger():
@@ -16,44 +16,45 @@ def init_logger():
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
-# Function to update elapsed time on the GUI
-def update_time(start_time, time_var):
-    elapsed_time = datetime.datetime.now() - start_time
-    time_var.set(f"Running for {str(elapsed_time).split('.')[0]}")
-    root.after(1000, update_time, start_time, time_var)
+# Function to update elapsed time
+def update_time(start_time, time_var, stop_event):
+    while not stop_event.is_set():
+        elapsed_time = datetime.datetime.now() - start_time
+        time_var.set(f"Running for {str(elapsed_time).split('.')[0]}")
+        time.sleep(1)
 
 # Function to move the mouse
 def move_mouse(stop_event, text_var, counter_var):
     counter = 0
     while not stop_event.is_set():
         try:
-            # Move mouse 150 pixels down
-            pyautogui.moveRel(0, 150)
-            # Wait for 0.5 seconds
+            pyautogui.moveRel(0, 10)
             time.sleep(0.5)
-            # Move mouse 150 pixels up
-            pyautogui.moveRel(0, -150)
-            # Increment the movement counter
+            pyautogui.moveRel(0, -10)
             counter += 1
             counter_var.set(f"Mouse has moved {counter} times")
             text_var.set("Mouse moving")
             logging.info("Mouse moved successfully.")
-            # Wait for 5 seconds before the next movement
             time.sleep(5)
         except pyautogui.FailSafeException:
             logging.warning("FailSafeException triggered, moving mouse to center.")
             text_var.set("FailSafeException, moved to center")
             stop_event.set()
 
-# Main function to create and control the GUI
+# Main function for GUI
 def main():
-    # Initialize the logger
+    # Initialize logging
     init_logger()
-    
-    # Set up the Tkinter GUI
-    global root
+
+    # Prevent Windows from going to sleep
+    ES_CONTINUOUS = 0x80000000
+    ES_SYSTEM_REQUIRED = 0x00000001
+    ctypes.windll.kernel32.SetThreadExecutionState(
+        ES_CONTINUOUS | ES_SYSTEM_REQUIRED)
+
+    # Tkinter GUI setup
     root = tk.Tk()
-    root.title("Mouse Mover for macOS")
+    root.title("Mouse Mover for Windows")
 
     frame = ttk.Frame(root, padding="10")
     frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -74,25 +75,17 @@ def main():
     time_label.grid(row=2, column=0, columnspan=2)
 
     stop_event = threading.Event()
-    caffeinate_process = None
 
     def start_moving():
-        nonlocal caffeinate_process
         stop_event.clear()
         start_time = datetime.datetime.now()
-        update_time(start_time, time_var)
+        threading.Thread(target=update_time, args=(start_time, time_var, stop_event)).start()
         threading.Thread(target=move_mouse, args=(stop_event, text_var, counter_var)).start()
-        if platform.system() == 'Darwin':
-            caffeinate_process = subprocess.Popen(['caffeinate'])
-            logging.info("Caffeinate command started.")
 
     def stop_moving():
         stop_event.set()
         text_var.set("Mouse stopped")
         counter_var.set("Mouse has not moved yet")
-        if caffeinate_process:
-            caffeinate_process.terminate()
-            logging.info("Caffeinate command terminated.")
 
     start_button = ttk.Button(frame, text="Start", command=start_moving)
     start_button.grid(row=3, column=0)
