@@ -13,10 +13,8 @@
 
 - **Python 3.11**: The core language used to develop the application.
 - **Tkinter**: Utilized for creating the graphical user interface (GUI).
-- **CustomTkinter**: An extension of Tkinter used to create a modern and visually appealing interface.
 - **Pillow (PIL)**: Used for handling images, specifically the flags for language switching.
 - **pyautogui**: Handles the mouse movement simulation.
-- **shutil**: Used to check for the presence of the `caffeinate` tool.
 - **subprocess**: Executes shell commands to install missing dependencies and manage processes like `caffeinate`.
 - **logging**: Logs the application's activity, useful for tracking and debugging.
 - **requests**: Fetches the flag images from the web.
@@ -25,7 +23,7 @@
 
 - **Multilingual Support**: The application supports both English and Spanish. Users can easily switch between languages using intuitive flag buttons.
 - **Responsive GUI**: The application interface is responsive and adapts to different screen sizes, with all buttons and labels centrally aligned.
-- **Modern UI**: A clean and modern user interface, designed with CustomTkinter for a better visual experience.
+- **Modern UI**: A clean and modern user interface.
 - **Mouse Movement Simulation**: Automatically moves the mouse at regular intervals to prevent the system from going idle.
 - **Logging**: All actions and events are logged to a file for tracking and debugging purposes.
 - **Auto-Installation of Dependencies**: Automatically checks and installs required dependencies, including the `caffeinate` tool on macOS.
@@ -45,7 +43,7 @@ python3 --version
 
 ```bash
 git clone https://github.com/yourusername/autoMouseMover.git
-cd autoMouseMover/mac/source
+cd autoMouseMover
 ```
 
 ### Install Required Python Packages
@@ -58,23 +56,22 @@ pip install -r requirements.txt
 
 If you don't have `pip` installed, you can install it by following the instructions [here](https://pip.pypa.io/en/stable/installation/).
 
-### Application Icon
+## Running the Project Locally
 
-The application uses a custom icon set, located in the `mac/source/` directory. The icons are in `.icns` format, specifically designed for macOS applications.
-
-### Package Creation
-
-If you wish to package the application into a standalone executable, you can use `PyInstaller`. The application is already configured with a `.spec` file:
+Navigate to the `mac/source` directory and run the `main.py` script:
 
 ```bash
-pyinstaller main.spec
+cd mac/source
+python3 main.py
 ```
+### Files in `mac/source`
 
-This will generate a `dist` folder with the packaged application.
-
-### Shell Script Initialization
-
-The application includes a shell script `install_caffeinate.sh` located in the `mac/source/` directory. This script checks if the `caffeinate` command is installed on the system and installs it via Homebrew if it's missing.
+- **`main.py`**: The main entry point for the application.
+- **`gui.py`**: Contains the code for the graphical user interface.
+- **`utils.py`**: Utility functions used throughout the application, including language loading and logging initialization.
+- **`install_caffeinate.sh`**: A shell script to check and install the `caffeinate` tool if it's missing.
+- **`MouseMoverIcon.icns`**: Custom icon for the application.
+- **`main.spec`**: Configuration file for `PyInstaller` to package the application (if needed).
 
 ## How It Works
 
@@ -88,10 +85,6 @@ The application includes a shell script `install_caffeinate.sh` located in the `
 
 If you'd like to contribute to this project, feel free to fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Screenshots
 
-![Screenshot](path/to/screenshot.png)
+![Screenshot](../MM_UI.png)
