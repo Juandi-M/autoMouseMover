@@ -72,3 +72,18 @@ node_modules/
 
 # Uncomment if using Visual Studio Code
 # .vscode/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# macOS files
+.DS_Store
+
+# Log files
+logs/
+*.log
+
+# Environment files
+.env
+.vscode/

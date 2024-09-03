@@ -12,16 +12,25 @@ from io import BytesIO
 from PIL import Image, ImageTk
 import requests
 import sys
+import os
+import importlib.util
 
 # Function to load the appropriate language file
 def load_language(lang_code):
-    if lang_code == "en":
-        from lang_en import languages
-    elif lang_code == "es":
-        from lang_es import languages
-    else:
-        raise ValueError("Unsupported language code")
-    return languages
+    # Ajusta el path usando el absolute path
+    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'lang_' + lang_code + '.py'))
+
+    # Imprimir la ruta completa para depuración
+    print(f"Cargando archivo de idioma desde: {lang_path}")
+    
+    if not os.path.exists(lang_path):
+        raise FileNotFoundError(f"No se encontró el archivo de idioma: {lang_path}")
+
+    spec = importlib.util.spec_from_file_location(f'lang_{lang_code}', lang_path)
+    lang_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(lang_module)
+    
+    return lang_module.languages
 
 # Default language is English
 current_lang = "en"
@@ -30,11 +39,33 @@ mouse_move_count = 0  # Variable to track how many times the mouse has moved
 
 # Initialize logging
 def init_logger():
+    log_dir = os.path.join(os.path.dirname(__file__), '..', 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    log_file = os.path.join(log_dir, 'mouse_mover.log')
     logging.basicConfig(
-        filename='mouse_mover.log',
+        filename=log_file,
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
+
+# Function to switch language
+def switch_language(lang):
+    global current_lang, languages
+    current_lang = lang
+    languages = load_language(current_lang)
+    update_labels()  # Call the update function to refresh labels
+
+# Initialize logging
+def init_logger():
+    log_dir = os.path.join(os.path.dirname(__file__), '..', 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    log_file = os.path.join(log_dir, 'mouse_mover.log')
+    logging.basicConfig(
+        filename=log_file,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+
 
 # Function to switch language
 def switch_language(lang):
@@ -116,7 +147,6 @@ def main():
     us_flag_url = "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/32px-Flag_of_the_United_States.svg.png"
     spain_flag_url = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/32px-Flag_of_Spain.svg.png"
 
-
     us_flag = load_flag_image(us_flag_url)
     spain_flag = load_flag_image(spain_flag_url)
 
@@ -156,7 +186,6 @@ def main():
 
     spain_button.bind("<Enter>", on_enter)
     spain_button.bind("<Leave>", on_leave)
-
 
     text_var = tk.StringVar()
     text_var.set(languages["press_start"])
