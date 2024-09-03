@@ -2,13 +2,9 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-
-# macOS system-generated files (resource fork, Finder lock files, etc.)
 ._*
 .Spotlight-V100
 .Trashes
-*.swp
-*.swo
 .VolumeIcon.icns
 com.apple.timemachine.donotpresent
 .AppleDB
@@ -21,6 +17,8 @@ Temporary Items
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
+*.so
 
 # Virtual environment directories
 env/
@@ -29,22 +27,19 @@ ENV/
 env.bak/
 venv.bak/
 
-# PyInstaller build directories
-/mac/build/
-/mac/dist/
+# PyInstaller build and dist directories
+mac/build/
+mac/dist/
 
 # PyInstaller specific files
-*.spec
+mac/source/*.spec  # Ignora main.spec específicamente en mac/source
 
 # Log files
+logs/
 *.log
 
 # Compiled binary files
 *.o
-*.pyc
-*.pyo
-*.pyd
-*.so
 *.dll
 
 # IDE and editor settings
@@ -53,37 +48,21 @@ venv.bak/
 *.sublime-workspace
 *.sublime-project
 
-# Backup files
+# Backup and temporary files
 *.bak
 *.tmp
 *.swp
+*.swo
 
 # macOS app bundles
 *.app
 
-# Ignore node_modules in case npm or Node.js gets involved
+# Node.js-related files
 node_modules/
 
 # Ignore all hidden files that start with a dot, except .gitignore
 .*
-
-# Uncomment if using JetBrains IDEs like PyCharm
-# .idea/
-
-# Uncomment if using Visual Studio Code
-# .vscode/
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
-# macOS files
-.DS_Store
-
-# Log files
-logs/
-*.log
+!.gitignore
 
 # Environment files
 .env
-.vscode/
