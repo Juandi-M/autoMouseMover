@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
-from utils import load_language, switch_language, update_labels, load_flag_image
+from app.utils import load_language, switch_language, update_labels, load_flag_image
 import time
 import threading
 import datetime
 import pyautogui
 import sys
-import os
 
 class MouseMoverApp:
     def __init__(self):

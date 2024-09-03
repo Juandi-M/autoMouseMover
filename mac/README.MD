@@ -122,3 +122,21 @@ If you'd like to contribute to this project, feel free to fork the repository an
 ## Screenshots
 
 ![Screenshot](../MM_UI.png)
+
+## License
+
+MIT License with Additional Terms
+
+© 2024 CalenBookAI. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
+
+1. **Attribution**: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+2. **Non-Commercial Use**: You may use, copy, and distribute the Software for personal, educational, and non-commercial purposes, provided that proper attribution is given to the original author. For any commercial use of the Software, explicit permission from the author is required.
+
+3. **Limited Warranty**: The Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
+
+4. **Modification and Distribution**: Modifications to the source code are allowed, but any distributed versions (modified or unmodified) must retain this license and the non-commercial clause unless explicit permission from the author is granted.
+
+5. **Source Code Access**: While the source code is shared under the terms above, this does not imply a right to the complete source code if you receive the Software as part of a compiled or binary-only distribution. Access to the full source code is provided at the discretion of CalenBookAI.
