@@ -11,6 +11,7 @@ import platform
 from io import BytesIO
 from PIL import Image, ImageTk
 import requests
+import sys
 
 # Function to load the appropriate language file
 def load_language(lang_code):
@@ -50,6 +51,8 @@ def update_labels():
     # Update the labels according to the current application state
     if stop_event.is_set():
         text_var.set(languages["mouse_stopped"])
+        counter_var.set(languages["mouse_not_moved"])
+        time_var.set(languages["not_started_yet"])
     else:
         if mouse_move_count == 0:
             counter_var.set(languages["mouse_not_moved"])
@@ -113,15 +116,35 @@ def main():
     us_flag_url = "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/32px-Flag_of_the_United_States.svg.png"
     spain_flag_url = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/32px-Flag_of_Spain.svg.png"
 
+
     us_flag = load_flag_image(us_flag_url)
     spain_flag = load_flag_image(spain_flag_url)
 
-    us_button = tk.Button(lang_frame, image=us_flag, command=lambda: switch_language("en"), bd=0, cursor="hand2")
+    # Configuration of the flag buttons
+    def reset_button_state(button):
+        button.config(relief="flat", state="normal")
+
+    def on_click_us():
+        switch_language("en")
+        root.after(100, lambda: reset_button_state(us_button))
+
+    def on_click_spain():
+        switch_language("es")
+        root.after(100, lambda: reset_button_state(spain_button))
+
+    us_button = tk.Button(
+        lang_frame, image=us_flag, command=on_click_us, relief="flat", 
+        bd=0, cursor="hand2", highlightthickness=0, bg=root['bg'], activebackground=root['bg']
+    )
     us_button.grid(row=0, column=0, padx=5, pady=5)
 
-    spain_button = tk.Button(lang_frame, image=spain_flag, command=lambda: switch_language("es"), bd=0, cursor="hand2")
+    spain_button = tk.Button(
+        lang_frame, image=spain_flag, command=on_click_spain, relief="flat", 
+        bd=0, cursor="hand2", highlightthickness=0, bg=root['bg'], activebackground=root['bg']
+    )
     spain_button.grid(row=0, column=1, padx=5, pady=5)
 
+    # Button hover effect with a simple zoom
     def on_enter(e):
         e.widget.config(width=36, height=36)
 
@@ -133,6 +156,7 @@ def main():
 
     spain_button.bind("<Enter>", on_enter)
     spain_button.bind("<Leave>", on_leave)
+
 
     text_var = tk.StringVar()
     text_var.set(languages["press_start"])
@@ -152,7 +176,8 @@ def main():
     caffeinate_process = None
 
     def start_moving():
-        nonlocal caffeinate_process
+        global mouse_move_count
+        mouse_move_count = 0  # Reset the mouse move count when starting
         stop_event.clear()
         start_perf_counter = time.perf_counter()
         threading.Thread(target=update_time, args=(start_perf_counter, time_var, stop_event)).start()
@@ -174,8 +199,6 @@ def main():
 
     def stop_moving():
         stop_event.set()
-        text_var.set(languages["mouse_stopped"])
-        counter_var.set(languages["mouse_not_moved"])
         update_labels()  # Ensure labels reflect the correct state when stopping mouse movement
         if caffeinate_process:
             caffeinate_process.terminate()
@@ -224,6 +247,7 @@ def move_mouse(stop_event, text_var, counter_var, start_perf_counter):
 def on_closing(root, stop_moving):
     stop_moving()
     root.destroy()
+    sys.exit(0)  # Ensure all threads are terminated when the window is closed
 
 def is_caffeinate_available():
     """Check if caffeinate command is available"""
