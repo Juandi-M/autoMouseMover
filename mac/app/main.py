@@ -1,11 +1,17 @@
-import sys
+import subprocess
 import os
 
-# Add the directory containing `app` to the Python path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
+def run_install_script():
+    # Get the path to the install_caffeinate.sh script in the _internal directory
+    script_path = os.path.join(os.path.dirname(__file__), '_internal', 'install_caffeinate.sh')
+    
+    # Run the script
+    subprocess.call(['sh', script_path])
 
+# Run the installation script first
+run_install_script()
+
+# Now proceed with the rest of your application
 from app.gui import MouseMoverApp
 from app.utils import init_logger
 
