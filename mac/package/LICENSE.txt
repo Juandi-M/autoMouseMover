@@ -1,0 +1,21 @@
+Auto Mouse Mover License Agreement
+
+IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE.
+
+1. LICENSE
+By receiving, opening the file package, and/or using Auto Mouse Mover ("Software"), you agree that this End User License Agreement ("EULA") is a legally binding and valid contract and agree to be bound by it. You agree to abide by the intellectual property laws and all of the terms and conditions of this Agreement.
+
+2. GRANT OF LICENSE
+CalenbookAI grants you a single, non-exclusive, non-transferable license to use the Software for personal or commercial purposes. You may not sell, distribute, or sublicense the Software without prior written consent from CalenbookAI.
+
+3. RESTRICTIONS
+You may not reverse engineer, decompile, or disassemble the Software. You may not modify or create derivative works based on the Software.
+
+4. TERMINATION
+This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice from CalenbookAI if you fail to comply with any term(s) of this EULA.
+
+5. DISCLAIMER OF WARRANTY
+The Software is provided "AS IS" without warranty of any kind. CalenbookAI disclaims all warranties, either express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose.
+
+6. LIMITATION OF LIABILITY
+In no event shall CalenbookAI be liable for any special, incidental, indirect, or consequential damages whatsoever arising out of the use of or inability to use the Software.

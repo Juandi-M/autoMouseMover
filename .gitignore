@@ -66,3 +66,7 @@ node_modules/
 
 # Environment files
 .env
+
+# macOS installer files
+AutoMouseMover.pkg 
+AutoMouseMoverInstaller.pkg

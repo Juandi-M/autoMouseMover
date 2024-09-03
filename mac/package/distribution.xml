@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="1">
-    <title>CalenbookAI Installer</title>
+    <title>Auto Mouse Mover Installer</title>
+    <background file="background.png" scaling="proportional"/>
+    <welcome file="welcome.txt"/>
     <license file="LICENSE.txt"/>
-    <pkg-ref id="com.calenbookai.mousemover"/>
+    <pkg-ref id="com.calenbookai.mousemover" installKBytes="0" version="0.1.0" auth="Root">file:AutoMouseMover.pkg</pkg-ref>
     <options customize="never" allow-external-scripts="no"/>
     <choices-outline>
         <line choice="default">
@@ -10,8 +12,7 @@
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="com.calenbookai.mousemover" visible="false">
+    <choice id="com.calenbookai.mousemover" visible="false" title="Auto Mouse Mover">
         <pkg-ref id="com.calenbookai.mousemover"/>
     </choice>
-    <pkg-ref id="com.calenbookai.mousemover" version="0.1.0" onConclusion="none">#relativePackagePath#</pkg-ref>
 </installer-gui-script>
