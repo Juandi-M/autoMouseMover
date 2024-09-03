@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>CalenbookAI Installer</title>
+    <license file="LICENSE.txt"/>
+    <pkg-ref id="com.calenbookai.mousemover"/>
+    <options customize="never" allow-external-scripts="no"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.calenbookai.mousemover"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.calenbookai.mousemover" visible="false">
+        <pkg-ref id="com.calenbookai.mousemover"/>
+    </choice>
+    <pkg-ref id="com.calenbookai.mousemover" version="0.1.0" onConclusion="none">#relativePackagePath#</pkg-ref>
+</installer-gui-script>
