@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="1">
-    <title>Auto Mouse Mover Installer</title>
+    <title>AutoMouseMover Installer</title>
     <background file="background.png" scaling="proportional"/>
     <welcome file="welcome.txt"/>
     <license file="LICENSE.txt"/>
@@ -12,7 +12,7 @@
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="com.calenbookai.mousemover" visible="false" title="Auto Mouse Mover">
+    <choice id="com.calenbookai.mousemover" visible="false" title="AutoMouseMover">
         <pkg-ref id="com.calenbookai.mousemover"/>
     </choice>
-</installer-gui-script>
+</installer-gui-script> 

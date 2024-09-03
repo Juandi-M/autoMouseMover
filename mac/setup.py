@@ -16,8 +16,8 @@ OPTIONS = {
     'packages': [],
     'includes': ['lang.lang_en', 'lang.lang_es'],  # Asegúrate de incluir los módulos de idioma
     'plist': {
-        'CFBundleName': 'CalenbookAI',
-        'CFBundleDisplayName': 'CalenbookAI',
+        'CFBundleName': 'AutoMouseMover',
+        'CFBundleDisplayName': 'AutoMouseMover',
         'CFBundleIdentifier': 'com.calenbookai.mousemover',
         'CFBundleVersion': '0.1.0',
         'CFBundleShortVersionString': '0.1.0',
