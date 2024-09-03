@@ -1,0 +1,5 @@
+Welcome to the Auto Mouse Mover Installer!
+
+This installer will guide you through the steps necessary to install Auto Mouse Mover on your system.
+
+Click "Continue" to proceed.
