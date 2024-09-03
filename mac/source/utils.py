@@ -1,14 +1,13 @@
 import logging
 import os
-import sys
 import importlib.util
 import requests
 from PIL import Image, ImageTk
 from io import BytesIO
 
 def load_language(lang_code):
-    # Ajustar la ruta usando la ruta absoluta
-    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'lang', f'lang_{lang_code}.py'))
+    # Adjust the path to the 'lang' directory within the 'mac' directory
+    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lang', f'lang_{lang_code}.py'))
     print(f"Loading language file from: {lang_path}")
     
     if not os.path.exists(lang_path):
@@ -20,8 +19,9 @@ def load_language(lang_code):
     
     return lang_module.languages
 
+
 def init_logger():
-    log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'logs'))
+    log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'logs'))
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, 'mouse_mover.log')
     
@@ -30,6 +30,7 @@ def init_logger():
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
+
 
 def switch_language(lang, app):
     app.current_lang = lang

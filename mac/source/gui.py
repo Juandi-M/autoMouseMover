@@ -10,6 +10,7 @@ import sys
 class MouseMoverApp:
     def __init__(self):
         self.current_lang = "en"
+        # Update the load_language call to reference the correct path
         self.languages = load_language(self.current_lang)
         self.mouse_move_count = 0
         self.stop_event = threading.Event()
@@ -17,6 +18,7 @@ class MouseMoverApp:
 
         self.root = tk.Tk()
         self.setup_gui()
+
 
     def setup_gui(self):
         self.root.title("Mouse Mover for macOS")
