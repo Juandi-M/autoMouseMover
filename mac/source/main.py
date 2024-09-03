@@ -1,5 +1,4 @@
 import subprocess
-import sys
 import shutil
 import tkinter as tk
 from tkinter import ttk
@@ -26,6 +25,7 @@ def load_language(lang_code):
 # Default language is English
 current_lang = "en"
 languages = load_language(current_lang)
+mouse_move_count = 0  # Variable to track how many times the mouse has moved
 
 # Initialize logging
 def init_logger():
@@ -40,7 +40,7 @@ def switch_language(lang):
     global current_lang, languages
     current_lang = lang
     languages = load_language(current_lang)
-    update_labels()
+    update_labels()  # Call the update function to refresh labels
 
 # Function to update all text labels according to the selected language
 def update_labels():
@@ -51,11 +51,15 @@ def update_labels():
     if stop_event.is_set():
         text_var.set(languages["mouse_stopped"])
     else:
-        text_var.set(languages["press_start"])
-    
-    # Ensure the other labels are updated
-    counter_var.set(languages["mouse_not_moved"])
-    time_var.set(languages["not_started_yet"])
+        if mouse_move_count == 0:
+            counter_var.set(languages["mouse_not_moved"])
+            text_var.set(languages["press_start"])
+        else:
+            counter_var.set(f"{languages['mouse_moved']} {mouse_move_count} {languages['times']}")
+            text_var.set(languages["log_mouse_moved"])
+
+    # Force immediate GUI update
+    root.update_idletasks()
 
 # Function to load flag images from the web
 def load_flag_image(url):
@@ -64,9 +68,14 @@ def load_flag_image(url):
     img = Image.open(BytesIO(img_data))
     return ImageTk.PhotoImage(img)
 
+# Global stop_event so it can be accessed across functions
+stop_event = threading.Event()
+
 # Main function for GUI
 def main():
     init_logger()
+
+    global root, text_var, counter_var, time_var, start_button, stop_button
 
     # Tkinter GUI setup
     root = tk.Tk()
@@ -93,7 +102,12 @@ def main():
 
     # Language buttons frame
     lang_frame = ttk.Frame(root, padding="5")
-    lang_frame.grid(row=0, column=0, sticky="e")
+    lang_frame.grid(row=0, column=0, pady=10, sticky="ew")
+
+    # Center language buttons frame
+    root.columnconfigure(0, weight=1)
+    lang_frame.columnconfigure(0, weight=1)
+    lang_frame.columnconfigure(1, weight=1)
 
     # Load flag images from the web
     us_flag_url = "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/32px-Flag_of_the_United_States.svg.png"
@@ -102,15 +116,24 @@ def main():
     us_flag = load_flag_image(us_flag_url)
     spain_flag = load_flag_image(spain_flag_url)
 
-    us_button = ttk.Button(lang_frame, image=us_flag, command=lambda: switch_language("en"), style="Flat.TButton")
+    us_button = tk.Button(lang_frame, image=us_flag, command=lambda: switch_language("en"), bd=0, cursor="hand2")
     us_button.grid(row=0, column=0, padx=5, pady=5)
 
-    spain_button = ttk.Button(lang_frame, image=spain_flag, command=lambda: switch_language("es"), style="Flat.TButton")
+    spain_button = tk.Button(lang_frame, image=spain_flag, command=lambda: switch_language("es"), bd=0, cursor="hand2")
     spain_button.grid(row=0, column=1, padx=5, pady=5)
 
-    style.configure('Flat.TButton', relief="flat", padding=(5, 5))
+    def on_enter(e):
+        e.widget.config(width=36, height=36)
 
-    global text_var, counter_var, time_var
+    def on_leave(e):
+        e.widget.config(width=32, height=32)
+
+    us_button.bind("<Enter>", on_enter)
+    us_button.bind("<Leave>", on_leave)
+
+    spain_button.bind("<Enter>", on_enter)
+    spain_button.bind("<Leave>", on_leave)
+
     text_var = tk.StringVar()
     text_var.set(languages["press_start"])
     label = ttk.Label(main_frame, textvariable=text_var, anchor="center")
@@ -126,7 +149,6 @@ def main():
     time_label = ttk.Label(main_frame, textvariable=time_var, anchor="center")
     time_label.grid(row=2, column=0, columnspan=2, pady=10, sticky="ew")
 
-    stop_event = threading.Event()
     caffeinate_process = None
 
     def start_moving():
@@ -135,7 +157,7 @@ def main():
         start_perf_counter = time.perf_counter()
         threading.Thread(target=update_time, args=(start_perf_counter, time_var, stop_event)).start()
         threading.Thread(target=move_mouse, args=(stop_event, text_var, counter_var, start_perf_counter)).start()
-        update_labels()  # Ensure labels reflect the correct state when starting the mouse movement
+        update_labels()  # Ensure labels reflect the correct state when starting mouse movement
         if platform.system() == 'Darwin' and is_caffeinate_available():
             try:
                 caffeinate_process = subprocess.Popen(['caffeinate'])
@@ -154,12 +176,11 @@ def main():
         stop_event.set()
         text_var.set(languages["mouse_stopped"])
         counter_var.set(languages["mouse_not_moved"])
-        update_labels()  # Ensure labels reflect the correct state when stopping the mouse movement
+        update_labels()  # Ensure labels reflect the correct state when stopping mouse movement
         if caffeinate_process:
             caffeinate_process.terminate()
             logging.info(languages["caffeinate_terminated"])
 
-    global start_button, stop_button
     start_button = ttk.Button(main_frame, text=languages["start"], command=start_moving)
     start_button.grid(row=3, column=0, padx=5, pady=10, sticky="ew")
 
@@ -174,12 +195,12 @@ def main():
 def update_time(start_perf_counter, time_var, stop_event):
     while not stop_event.is_set():
         elapsed_time = time.perf_counter() - start_perf_counter
-        time_var.set(f"Running for {datetime.timedelta(seconds=int(elapsed_time))}")
+        time_var.set(f"{languages['running_for']} {datetime.timedelta(seconds=int(elapsed_time))}")
         time.sleep(1)
 
 # Function to move the mouse
 def move_mouse(stop_event, text_var, counter_var, start_perf_counter):
-    counter = 0
+    global mouse_move_count  # Track mouse movements across functions
     next_move_time = 5  # Move the mouse when this time is reached
     while not stop_event.is_set():
         elapsed_time = time.perf_counter() - start_perf_counter
@@ -188,8 +209,8 @@ def move_mouse(stop_event, text_var, counter_var, start_perf_counter):
                 pyautogui.moveRel(0, 10)
                 time.sleep(0.5)
                 pyautogui.moveRel(0, -10)
-                counter += 1
-                counter_var.set(f"Mouse has moved {counter} times")
+                mouse_move_count += 1
+                counter_var.set(f"{languages['mouse_moved']} {mouse_move_count} {languages['times']}")
                 text_var.set(languages["log_mouse_moved"])
                 logging.info(languages["log_mouse_moved"])
                 next_move_time += 5
@@ -203,6 +224,10 @@ def move_mouse(stop_event, text_var, counter_var, start_perf_counter):
 def on_closing(root, stop_moving):
     stop_moving()
     root.destroy()
+
+def is_caffeinate_available():
+    """Check if caffeinate command is available"""
+    return shutil.which("caffeinate") is not None
 
 if __name__ == '__main__':
     main()

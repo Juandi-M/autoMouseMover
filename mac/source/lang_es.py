@@ -1,15 +1,18 @@
 languages = {
     "start": "Iniciar",
     "stop": "Detener",
-    "press_start": "Presione Iniciar para mover el ratón",
-    "mouse_not_moved": "El ratón aún no se ha movido",
-    "not_started_yet": "No iniciado aún",
+    "press_start": "Presiona Iniciar para mover el ratón",
+    "mouse_not_moved": "El ratón no se ha movido aún",
+    "not_started_yet": "No ha comenzado aún",
     "mouse_stopped": "Ratón detenido",
-    "fail_safe": "FailSafeException, movido al centro",
-    "failed_install": "Error al instalar caffeinate",
-    "caffeinate_started": "Comando caffeinate iniciado.",
-    "failed_to_start_caffeinate": "Error al iniciar caffeinate.",
-    "caffeinate_not_found": "Comando caffeinate no encontrado. Intentando instalar.",
-    "caffeinate_terminated": "Comando caffeinate terminado.",
-    "log_mouse_moved": "Ratón movido con éxito."
+    "log_mouse_moved": "Ratón movido con éxito.",
+    "fail_safe": "Se ha activado FailSafeException, deteniendo.",
+    "running_for": "Corriendo por",
+    "mouse_moved": "El ratón se ha movido",
+    "times": "veces",
+    "caffeinate_started": "Comando Caffeinate iniciado.",
+    "failed_to_start_caffeinate": "No se pudo iniciar Caffeinate.",
+    "caffeinate_not_found": "Comando Caffeinate no encontrado. Intentando instalar.",
+    "failed_install": "No se pudo instalar Caffeinate.",
+    "caffeinate_terminated": "Comando Caffeinate terminado."
 }
