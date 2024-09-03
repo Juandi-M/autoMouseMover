@@ -1,33 +1,74 @@
-
-# General
+# macOS-specific files
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
+# macOS system-generated files (resource fork, Finder lock files, etc.)
 ._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
 .Spotlight-V100
-.TemporaryItems
 .Trashes
+*.swp
+*.swo
 .VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
+com.apple.timemachine.donotpresent
 .AppleDB
 .AppleDesktop
 Network Trash Folder
 Temporary Items
 .apdisk
 
-# IDEs
+# Python-specific files
+__pycache__/
+*.py[cod]
+*$py.class
 
-.idea
-.vscode
+# Virtual environment directories
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyInstaller build directories
+/mac/build/
+/mac/dist/
+
+# PyInstaller specific files
+*.spec
+
+# Log files
+*.log
+
+# Compiled binary files
+*.o
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+
+# macOS app bundles
+*.app
+
+# Ignore node_modules in case npm or Node.js gets involved
+node_modules/
+
+# Ignore all hidden files that start with a dot, except .gitignore
+.*
+
+# Uncomment if using JetBrains IDEs like PyCharm
+# .idea/
+
+# Uncomment if using Visual Studio Code
+# .vscode/
