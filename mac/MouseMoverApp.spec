@@ -1,4 +1,5 @@
 import os
+import shutil
 
 # Asume que el directorio actual es 'mac'
 base_dir = os.getcwd()
@@ -27,6 +28,8 @@ a = Analysis(
     runtime_hooks=[],
     excludes=[],
     noarchive=False,
+    workpath=build_path,  # Ruta 'build' bajo 'release'
+    distpath=dist_path,   # Ruta 'dist' bajo 'release'
 )
 
 pyz = PYZ(a.pure, a.zipped_data)
@@ -58,8 +61,6 @@ coll = COLLECT(
     upx=True,
     upx_exclude=[],
     name='MouseMoverApp',
-    workpath=build_path,  # Especifica la ruta 'build'
-    distpath=dist_path,   # Especifica la ruta 'dist'
 )
 
 app = BUNDLE(
@@ -68,5 +69,11 @@ app = BUNDLE(
     icon=os.path.join(base_dir, 'assets', 'icons', 'MouseMoverIcon.icns'),
     bundle_identifier='com.calenbookai.MouseMoverApp',
     info_plist=os.path.join(base_dir, 'assets', 'package', 'info.plist'),
-    distpath=dist_path,   # Asegura que el .app se genere en la carpeta 'dist'
 )
+
+# Mover las carpetas 'build' y 'dist' a 'release' después de la construcción
+if not os.path.exists(release_dir):
+    os.makedirs(release_dir)
+
+shutil.move(os.path.join(base_dir, 'build'), build_path)
+shutil.move(os.path.join(base_dir, 'dist'), dist_path)

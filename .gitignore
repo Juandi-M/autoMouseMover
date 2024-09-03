@@ -30,6 +30,7 @@ venv.bak/
 # PyInstaller build and dist directories
 mac/build/
 mac/dist/
+mac/release/
 
 
 # Log files
