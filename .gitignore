@@ -31,8 +31,6 @@ venv.bak/
 mac/build/
 mac/dist/
 
-# PyInstaller specific files
-mac/source/*.spec  # Ignora main.spec específicamente en mac/source
 
 # Log files
 logs/
