@@ -6,8 +6,8 @@ from PIL import Image, ImageTk
 from io import BytesIO
 
 def load_language(lang_code):
-    # Adjust the path to the 'lang' directory within the 'mac' directory
-    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lang', f'lang_{lang_code}.py'))
+    # Adjust the path to the 'lang' directory within the 'source' directory
+    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'lang', f'lang_{lang_code}.py'))
     print(f"Loading language file from: {lang_path}")
     
     if not os.path.exists(lang_path):
