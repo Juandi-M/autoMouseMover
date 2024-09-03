@@ -6,6 +6,7 @@ import threading
 import datetime
 import pyautogui
 import sys
+import os
 
 class MouseMoverApp:
     def __init__(self):
@@ -18,7 +19,6 @@ class MouseMoverApp:
 
         self.root = tk.Tk()
         self.setup_gui()
-
 
     def setup_gui(self):
         self.root.title("Mouse Mover for macOS")
@@ -111,6 +111,7 @@ class MouseMoverApp:
 
     def on_closing(self):
         self.stop_moving()
+        self.root.quit()  # This will terminate the main loop
         self.root.destroy()
         sys.exit(0)
 

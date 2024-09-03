@@ -2,7 +2,6 @@
 
 ![Python](https://img.shields.io/badge/python-v3.11-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-Completed-brightgreen.svg)
 
 ## Overview
@@ -29,6 +28,39 @@
 - **Auto-Installation of Dependencies**: Automatically checks and installs required dependencies, including the `caffeinate` tool on macOS.
 - **Custom Icons**: Includes a custom icon set for the application.
 
+## Project Structure
+
+The project is organized as follows:
+
+```plaintext
+mac/
+├── README.MD               # Project documentation
+├── app/                    # Core application logic
+│   ├── gui.py              # GUI-related code
+│   ├── lang/               # Language files (English and Spanish)
+│   ├── main.py             # Entry point of the application
+│   └── utils.py            # Utility functions
+├── assets/                 # Static assets like icons and packaging files
+│   ├── icons/              # Application icons
+│   └── package/            # Files related to packaging the app
+├── build/                  # Build artifacts
+│   └── MouseMoverApp.spec  # PyInstaller spec file
+├── logs/                   # Logs directory
+├── requirements.txt        # Python dependencies
+└── scripts/                # Setup and installation scripts
+    ├── install_caffeinate.sh
+    └── postinstall.sh
+```
+
+### Key Files
+- **`app/main.py`**: The main entry point for the application.
+- **`app/gui.py`**: Contains the code for the graphical user interface.
+- **`app/utils.py`**: Utility functions used throughout the application, including language loading and logging initialization.
+- **`app/lang/`**: Contains the language files (`lang_en.py`, `lang_es.py`).
+- **`assets/icons/MouseMoverIcon.icns`**: Custom icon for the application.
+- **`build/MouseMoverApp.spec`**: Configuration file for `PyInstaller` to package the application.
+- **`scripts/install_caffeinate.sh`**: A shell script to check and install the `caffeinate` tool if it's missing.
+
 ## Installation
 
 ### Prerequisites
@@ -43,7 +75,7 @@ python3 --version
 
 ```bash
 git clone https://github.com/yourusername/autoMouseMover.git
-cd autoMouseMover
+cd autoMouseMover/mac
 ```
 
 ### Install Required Python Packages
@@ -58,20 +90,12 @@ If you don't have `pip` installed, you can install it by following the instructi
 
 ## Running the Project Locally
 
-Navigate to the `mac/source` directory and run the `main.py` script:
+Navigate to the `app` directory and run the `main.py` script:
 
 ```bash
-cd mac/source
+cd app
 python3 main.py
 ```
-### Files in `mac/source`
-
-- **`main.py`**: The main entry point for the application.
-- **`gui.py`**: Contains the code for the graphical user interface.
-- **`utils.py`**: Utility functions used throughout the application, including language loading and logging initialization.
-- **`install_caffeinate.sh`**: A shell script to check and install the `caffeinate` tool if it's missing.
-- **`MouseMoverIcon.icns`**: Custom icon for the application.
-- **`main.spec`**: Configuration file for `PyInstaller` to package the application (if needed).
 
 ## How It Works
 
@@ -80,6 +104,16 @@ python3 main.py
 - **Start and Stop**: Click "Start" to begin simulating mouse movements. The application will log how many times the mouse has moved and display the elapsed time. Click "Stop" to halt the simulation.
 
 - **Auto Installation of `caffeinate`**: If the `caffeinate` command is not found on your system, the application will attempt to install it automatically using Homebrew.
+
+## Packaging the Application
+
+If you want to package the application as a standalone macOS app, you can use PyInstaller with the provided `.spec` file:
+
+```bash
+pyinstaller build/MouseMoverApp.spec
+```
+
+This will generate a `.app` bundle in the `dist` directory.
 
 ## Contributing
 

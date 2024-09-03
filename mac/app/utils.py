@@ -1,15 +1,24 @@
 import logging
 import os
 import importlib.util
+import sys
 import requests
 from PIL import Image, ImageTk
 from io import BytesIO
 
 def load_language(lang_code):
-    # Adjust the path to the 'lang' directory within the 'source' directory
-    lang_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'lang', f'lang_{lang_code}.py'))
+    # Adjust the path to the 'lang' directory within the '_internal' directory if bundled
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+    # Path when running the app after bundling with PyInstaller
+    lang_path = os.path.join(base_path, '_internal', 'lang', f'lang_{lang_code}.py')
+
+    # Fallback path when running the app from source code
+    if not os.path.exists(lang_path):
+        lang_path = os.path.join(base_path, 'lang', f'lang_{lang_code}.py')
+
     print(f"Loading language file from: {lang_path}")
-    
+
     if not os.path.exists(lang_path):
         raise FileNotFoundError(f"Language file not found: {lang_path}")
 
