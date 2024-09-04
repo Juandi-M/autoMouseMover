@@ -1,57 +1,90 @@
+# 🖱️ **Mouse Mover for Windows & macOS**
 
-# Mouse Mover
+![GitHub stars](https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=social) ![Release Downloads](https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?color=blue) ![macOS Sonoma](https://img.shields.io/badge/macOS-Sonoma-lightgrey.svg) ![Windows 11](https://img.shields.io/badge/Windows-11-blue.svg) ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg) ![Tkinter](https://img.shields.io/badge/Tkinter-GUI-green.svg) 
 
-## Overview
+🎉 **Mouse Mover** is the perfect solution for keeping your computer awake during long tasks, downloads, presentations, or just to prevent your system from going to sleep while you're away. Whether you’re using **macOS** or **Windows**, this simple app will take care of moving the mouse cursor for you, with just a click of a button!
 
-Mouse Mover is a Python application that moves the mouse cursor at a specified interval to prevent the computer from going to sleep. The application provides a simple GUI for starting and stopping mouse movement, and it also shows a timer and a counter to indicate how long it has been running and how many times the mouse has moved.
+### 🚀 **Why Mouse Mover?**
+- **No more interruptions:** Ensure your system doesn’t go idle during long processes.
+- **Cross-platform:** Fully functional on both **Windows 11** and **macOS Sonoma**.
+- **Easy-to-use:** A minimalistic GUI that lets you start or stop the app with ease.
+- **Activity tracker:** Get real-time updates of how many times the mouse has moved and for how long the app has been running.
+- **Custom intervals:** The app moves your cursor at regular intervals to mimic activity.
+- **Multilingual:** Supports **English** and **Spanish** with flag-based language switching.
 
-## Features
+---
 
-- Moves the mouse cursor up and down at a specified interval.
-- Displays the elapsed time and movement counter.
-- Provides Start and Stop buttons for controlling mouse movement.
-- Includes logging for debugging and tracking.
-- Prevents the system from going to sleep while running (Windows and macOS).
+## ⚙️ **Tech Stack & Features**
+- **Languages:** Python 3.12 🐍
+- **GUI Libraries:** Tkinter (macOS) & CustomTkinter for Windows.
+- **Cross-Platform:** Works on **macOS** and **Windows 11**.
+- **Auto Dependencies:** Automatically handles `caffeinate` installation for macOS if necessary.
+- **Lightweight:** Small app size that doesn’t hog system resources.
+- **Modern Look:** Sleek interface with platform-specific icons and design aesthetics.
 
-## Requirements
+---
 
-- Python 3.x
-- Tkinter
-- pyautogui
-- ctypes (Windows only)
+## 🌟 **Features**
+### ✨ **Cross-Platform:**
+- 🖥️ **macOS**: Uses `Tkinter` and system-friendly `caffeinate` to prevent the system from sleeping.
+- 🖼️ **Windows**: Leverages `CustomTkinter` for a modern look and uses `pyautogui` to handle mouse movement.
 
-## Installation
+### 🕹️ **Custom Controls:**
+- **Start and Stop Buttons:** Easily control when the mouse should start or stop moving.
+- **Interval Timer:** Set intervals to keep your system active without moving the mouse manually.
+- **Log Tracking:** Records your mouse movements, useful for tracking and debugging.
 
-1. Clone the repository.
-    ```bash
-    git clone https://github.com/your-username/mouse-mover.git
-    ```
+### 📊 **Activity Feedback:**
+- See how many times the mouse has moved since you started.
+- A live timer shows how long the app has been running.
 
-2. Navigate to the directory.
-    ```bash
-    cd mouse-mover
-    ```
+---
 
-3. Install the required packages.
-    ```bash
-    pip install -r requirements.txt
-    ```
+## 📥 **Get Mouse Mover**
 
-## Usage
+👉 **[Download Mouse Mover for macOS & Windows Here](https://github.com/Juandi-M/autoMouseMover/releases)** 👈
 
-- For macOS:
-    ```bash
-    python3 main_mac.py
-    ```
+🚀 **Installation Instructions:**
+1. Download the latest `.zip` file from the [release section](https://github.com/Juandi-M/autoMouseMover/releases).
+2. For **macOS**: Unzip the file, **drag the `.app` into your `Applications` folder**.
+    - If you encounter a Gatekeeper warning because the app is unsigned, right-click the app and select "Open" from the context menu. Then click "Open" again in the dialog.
+3. For **Windows**: Download the `.exe` file (coming soon).
+4. Enjoy! 🖱️
 
-- For Windows:
-    ```bash
-    python main_windows.py
-    ```
+Download Link for macOS:
+- **[MouseMoverMac.zip](https://github.com/Juandi-M/autoMouseMover/releases/download/v0.5.0-beta/MouseMoverMac.zip)**
 
-## Screenshots
+---
 
-(Include some screenshots of the application here)
+## 🖼️ **Screenshots**
 
-## License
-TBD
+![Mouse Mover Interface](https://github.com/Juandi-M/autoMouseMover/raw/main/MM_UI.png)
+
+---
+
+## 🏷️ **Releases**
+
+Check out our latest release **[here](https://github.com/Juandi-M/autoMouseMover/releases)** and grab your version of **Mouse Mover** for your platform!
+
+- Latest version: **v1.0.0** (Pre-release) 🖥️
+- Direct Download: **[MouseMoverMac.zip](https://github.com/Juandi-M/autoMouseMover/releases/download/v0.5.0-beta/MouseMoverMac.zip)**
+
+---
+
+## 🌟 **Contribute & Give Us a Star!**
+
+If you find this tool useful, **don’t forget to give us a star** ⭐ on GitHub!
+
+[![GitHub stars](https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=social)](https://github.com/Juandi-M/autoMouseMover/stargazers)
+
+If you have ideas, suggestions, or improvements, feel free to fork the repo, make your changes, and submit a pull request.
+
+**Total Downloads:**
+
+[![GitHub All Releases](https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?color=blue)](https://github.com/Juandi-M/autoMouseMover/releases)
+ tool useful, **don’t forget to give us a star** ⭐ on GitHub! If you have ideas, suggestions, or improvements, feel free to fork the repo, make your changes, and submit a pull request.
+
+---
+
+## 📄 **License**
+This project is licensed under the [MIT License](LICENSE).
