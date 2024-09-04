@@ -1,6 +1,9 @@
 # 🖱️ **Mouse Mover for Windows & macOS**
+![macOS Sonoma](https://img.shields.io/badge/🍏-macOS%20Sonoma-lightgrey?style=for-the-badge&labelColor=black) 
+![Windows 11](https://img.shields.io/badge/🪟-Windows%2011-blue?style=for-the-badge&labelColor=black) 
+![Python 3.12](https://img.shields.io/badge/🐍-Python%203.12-blue?style=for-the-badge&labelColor=black) 
+![Tkinter](https://img.shields.io/badge/🖼️-Tkinter%20GUI-green?style=for-the-badge&labelColor=black)
 
-![GitHub stars](https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=social) ![Release Downloads](https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?color=blue) ![macOS Sonoma](https://img.shields.io/badge/macOS-Sonoma-lightgrey.svg) ![Windows 11](https://img.shields.io/badge/Windows-11-blue.svg) ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg) ![Tkinter](https://img.shields.io/badge/Tkinter-GUI-green.svg) 
 
 🎉 **Mouse Mover** is the perfect solution for keeping your computer awake during long tasks, downloads, presentations, or just to prevent your system from going to sleep while you're away. Whether you’re using **macOS** or **Windows**, this simple app will take care of moving the mouse cursor for you, with just a click of a button!
 
@@ -12,7 +15,6 @@
 - **Custom intervals:** The app moves your cursor at regular intervals to mimic activity.
 - **Multilingual:** Supports **English** and **Spanish** with flag-based language switching.
 
----
 
 ## ⚙️ **Tech Stack & Features**
 - **Languages:** Python 3.12 🐍
@@ -22,7 +24,6 @@
 - **Lightweight:** Small app size that doesn’t hog system resources.
 - **Modern Look:** Sleek interface with platform-specific icons and design aesthetics.
 
----
 
 ## 🌟 **Features**
 ### ✨ **Cross-Platform:**
@@ -38,7 +39,7 @@
 - See how many times the mouse has moved since you started.
 - A live timer shows how long the app has been running.
 
----
+
 
 ## 📥 **Get Mouse Mover**
 
@@ -54,13 +55,32 @@
 Download Link for macOS:
 - **[MouseMoverMac.zip](https://github.com/Juandi-M/autoMouseMover/releases/download/v0.5.0-beta/MouseMoverMac.zip)**
 
----
-
 ## 🖼️ **Screenshots**
 
-![Mouse Mover Interface]([https://github.com/Juandi-M/autoMouseMover/raw/main/MM_UI.png](https://github.com/Juandi-M/autoMouseMover/blob/master/MM_UI.png))
+<div align="center">
 
----
+<table>
+  <tr>
+    <td align="center">
+      <strong>Mac View</strong>
+    </td>
+    <td align="center">
+      <strong>Windows View</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="mac_ui.png" alt="Mouse Mover Mac Interface" width="300">
+    </td>
+    <td align="center">
+      <img src="https://via.placeholder.com/300?text=Work+In+Progress" alt="Mouse Mover Windows Interface" width="300">
+    </td>
+  </tr>
+</table>
+
+</div>
+
+
 
 ## 🏷️ **Releases**
 
@@ -69,32 +89,25 @@ Check out our latest release **[here](https://github.com/Juandi-M/autoMouseMover
 - Latest version: **v1.0.0** (Pre-release) 🖥️
 - Direct Download: **[MouseMoverMac.zip](https://github.com/Juandi-M/autoMouseMover/releases/download/v0.5.0-beta/MouseMoverMac.zip)**
 
----
+
+<div align="center">
+
 ## 🌟 **Contribute & Give Us a Star!**
 
 If you find this tool useful, **don’t forget to give us a star** ⭐ on GitHub! Help us improve by sharing feedback, suggestions, or contributing to the project.
 
-<p align="center">
-  <a href="https://github.com/Juandi-M/autoMouseMover/stargazers">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=for-the-badge&logo=github&color=yellow">
-  </a>
-  <br>
-  <b>Star the project by clicking the badge!</b>
-</p>
+![GitHub Repo stars](https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=for-the-badge&logo=github&labelColor=black) 
 
----
+
 
 ### **Total Downloads:**
 
-<p align="center">
-  <a href="https://github.com/Juandi-M/autoMouseMover/releases">
-    <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?style=for-the-badge&logo=github&color=blue">
-  </a>
-  <br>
-  <b>Click the badge to view the latest release!</b>
-</p>
+![Release Downloads](https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?style=for-the-badge&logo=github&labelColor=black) 
 
----
+</div>
+
+
 
 ## 📄 **License**
+
 This project is licensed under the [MIT License](LICENSE).
