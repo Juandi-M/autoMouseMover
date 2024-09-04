@@ -58,7 +58,7 @@ Download Link for macOS:
 
 ## 🖼️ **Screenshots**
 
-![Mouse Mover Interface](https://github.com/Juandi-M/autoMouseMover/raw/main/MM_UI.png)
+![Mouse Mover Interface]([https://github.com/Juandi-M/autoMouseMover/raw/main/MM_UI.png](https://github.com/Juandi-M/autoMouseMover/blob/master/MM_UI.png))
 
 ---
 
@@ -70,19 +70,29 @@ Check out our latest release **[here](https://github.com/Juandi-M/autoMouseMover
 - Direct Download: **[MouseMoverMac.zip](https://github.com/Juandi-M/autoMouseMover/releases/download/v0.5.0-beta/MouseMoverMac.zip)**
 
 ---
-
 ## 🌟 **Contribute & Give Us a Star!**
 
-If you find this tool useful, **don’t forget to give us a star** ⭐ on GitHub!
+If you find this tool useful, **don’t forget to give us a star** ⭐ on GitHub! Help us improve by sharing feedback, suggestions, or contributing to the project.
 
-[![GitHub stars](https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=social)](https://github.com/Juandi-M/autoMouseMover/stargazers)
+<p align="center">
+  <a href="https://github.com/Juandi-M/autoMouseMover/stargazers">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Juandi-M/autoMouseMover?style=for-the-badge&logo=github&color=yellow">
+  </a>
+  <br>
+  <b>Star the project by clicking the badge!</b>
+</p>
 
-If you have ideas, suggestions, or improvements, feel free to fork the repo, make your changes, and submit a pull request.
+---
 
-**Total Downloads:**
+### **Total Downloads:**
 
-[![GitHub All Releases](https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?color=blue)](https://github.com/Juandi-M/autoMouseMover/releases)
- tool useful, **don’t forget to give us a star** ⭐ on GitHub! If you have ideas, suggestions, or improvements, feel free to fork the repo, make your changes, and submit a pull request.
+<p align="center">
+  <a href="https://github.com/Juandi-M/autoMouseMover/releases">
+    <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/Juandi-M/autoMouseMover/total?style=for-the-badge&logo=github&color=blue">
+  </a>
+  <br>
+  <b>Click the badge to view the latest release!</b>
+</p>
 
 ---
 
