@@ -51,6 +51,19 @@ def run_install_script():
             logging.error(f"Script stderr: {e.stderr}")
     else:
         logging.warning(f"Caffeinate script not found at {CAFFEINATE_SCRIPT}")
+
+def setup_appearance():
+    """Setup initial appearance settings."""
+    try:
+        # Set initial appearance mode to system
+        customtkinter.set_appearance_mode("system")
+        # Set default scaling to 100%
+        customtkinter.set_widget_scaling(1.0)
+        # Set default DPI awareness
+        customtkinter.deactivate_automatic_dpi_awareness()
+        logging.info("Initial appearance settings configured")
+    except Exception as e:
+        logging.error(f"Error setting up appearance: {e}")
         
 def change_scaling_event(self, new_scaling: str):
     """Change the UI scaling of the application."""
@@ -83,6 +96,9 @@ def main():
         
         # Log application start
         logging.info("Mouse Mover Application Starting")
+        
+        # Setup appearance settings
+        setup_appearance()
         
         # Run installation script
         run_install_script()

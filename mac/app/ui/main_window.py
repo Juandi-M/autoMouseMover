@@ -15,7 +15,7 @@ class MouseMoverApp(customtkinter.CTk):
 
         # Initialize core managers and state
         self.state_manager = StateManager()
-        self.thread_manager = MouseMoverThreadManager(self)  # Updated class name
+        self.thread_manager = MouseMoverThreadManager(self)
         self.event_handler = AppEventHandler(self)
 
         # Initialize application state
@@ -29,8 +29,8 @@ class MouseMoverApp(customtkinter.CTk):
         self.title("Mouse Mover")
         self.geometry("1100x580")
 
-        # Set default appearance
-        customtkinter.set_appearance_mode("dark")
+        # Set system appearance mode for theme detection
+        customtkinter.set_appearance_mode("system")  # Changed from "dark"
         customtkinter.set_default_color_theme("blue")
 
         # Initialize UI variables
@@ -39,10 +39,9 @@ class MouseMoverApp(customtkinter.CTk):
         self.time_var = None
         self.start_button = None
         self.stop_button = None
-
+        
         # Set up the main window and UI components
         self.root, self.ui_components = setup_main_window(self)
-
         # Configure window behavior
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         

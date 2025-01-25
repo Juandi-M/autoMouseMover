@@ -48,12 +48,11 @@ def switch_language(lang, app):
     app.current_lang = lang
     app.languages = load_language(lang)
     
-    # Update button states if they exist
-    if hasattr(app, 'english_btn'):
-        app.english_btn.set_active(lang == "en")
-    if hasattr(app, 'spanish_btn'):
-        app.spanish_btn.set_active(lang == "es")
+    # Update button appearances using the new function from window_setup
+    from app.ui.window_setup import update_language_buttons
+    update_language_buttons(app, lang)
     
+    # Update all labels (only need to call this once)
     update_labels(app)
 
 
