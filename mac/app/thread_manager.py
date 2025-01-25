@@ -135,26 +135,26 @@ class MouseMoverThreadManager(BaseThreadManager):
             logging.error(f"Error in time update thread: {e}")
 
     def _move_mouse(self, start_perf_counter, stop_flag):
-        """Mouse movement thread."""
-        try:
-            next_move_time = time.perf_counter() + MOVE_INTERVAL
-            
-            while not stop_flag.is_set() and self._should_run.is_set():
-                current_time = time.perf_counter()
+            """Mouse movement thread."""
+            try:
+                next_move_time = time.perf_counter() + self.app.move_interval
                 
-                if current_time >= next_move_time:
-                    pyautogui.moveRel(0, MOVE_DISTANCE)
-                    time.sleep(MOVE_DELAY)
-                    pyautogui.moveRel(0, -MOVE_DISTANCE)
+                while not stop_flag.is_set() and self._should_run.is_set():
+                    current_time = time.perf_counter()
                     
-                    if self.app and hasattr(self.app, 'mouse_move_count'):
-                        self.app.mouse_move_count += 1
-                        self.app.counter_var.set(
-                            f"{self.app.languages['mouse_moved']} {self.app.mouse_move_count} {self.app.languages['times']}"
-                        )
-                    next_move_time = current_time + MOVE_INTERVAL
-                
-                # Check stop condition more frequently
-                time.sleep(0.1)
-        except Exception as e:
-            logging.error(f"Error in mouse movement thread: {e}")
+                    if current_time >= next_move_time:
+                        pyautogui.moveRel(0, MOVE_DISTANCE)
+                        time.sleep(MOVE_DELAY)
+                        pyautogui.moveRel(0, -MOVE_DISTANCE)
+                        
+                        if self.app and hasattr(self.app, 'mouse_move_count'):
+                            self.app.mouse_move_count += 1
+                            self.app.counter_var.set(
+                                f"{self.app.languages['mouse_moved']} {self.app.mouse_move_count} {self.app.languages['times']}"
+                            )
+                        next_move_time = current_time + self.app.move_interval
+                    
+                    # Check stop condition more frequently
+                    time.sleep(0.1)
+            except Exception as e:
+                logging.error(f"Error in mouse movement thread: {e}")

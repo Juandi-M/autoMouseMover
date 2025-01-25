@@ -23,6 +23,7 @@ class MouseMoverApp(customtkinter.CTk):
         self.languages = load_language(self.current_lang)
         self.mouse_move_count = 0
         self.caffeinate_process = None
+        self.move_interval = 5  # Default 5 seconds
 
         # Configure the application appearance
         self.title("Mouse Mover")
@@ -44,6 +45,22 @@ class MouseMoverApp(customtkinter.CTk):
 
         # Configure window behavior
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+    def change_move_interval(self, interval_str: str):
+        """Change the mouse movement interval."""
+        # Convert string to seconds
+        if "minute" in interval_str:
+            seconds = 60
+        else:
+            seconds = int(interval_str.split()[0])
+        
+        self.move_interval = seconds
+        logging.info(f"Changed move interval to {seconds} seconds")
+        
+        # If currently running, restart the threads to apply new interval
+        if self.state_manager.current_state == AppState.RUNNING:
+            self.stop_moving()
+            self.start_moving()
         
     def change_appearance_mode_event(self, new_appearance_mode: str):
         """Change the appearance mode of the application."""
