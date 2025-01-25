@@ -1,9 +1,8 @@
 import tkinter as tk
 import customtkinter
 import os
-from PIL import Image
 from app.config import APP_NAME, MIN_WINDOW_SIZE
-from app.utils import load_language, update_labels, switch_language
+from app.utils import load_language, update_labels
 
 # Modern dark theme colors
 COLORS = {
@@ -16,43 +15,6 @@ COLORS = {
     "text": "#FFFFFF",         # White text
     "text_secondary": "#9CA3AF" # Gray text
 }
-
-class SimpleCircularFlagButton(customtkinter.CTkButton):
-    def __init__(self, master, image_path, is_active=False, command=None):
-        # Create the CTkImage before initializing the button
-        try:
-            pil_image = Image.open(image_path)
-            flag_image = customtkinter.CTkImage(
-                light_image=pil_image,
-                dark_image=pil_image,  # Same image for both modes
-                size=(60, 60)
-            )
-        except Exception as e:
-            print(f"Error loading image: {e}")
-            flag_image = None
-
-        # Initialize the button with the image
-        super().__init__(
-            master=master,
-            text="",  # No text
-            image=flag_image,
-            compound="center",
-            width=80,
-            height=80,
-            corner_radius=40,
-            fg_color=COLORS["button"] if is_active else COLORS["sidebar"],
-            hover_color=COLORS["button_hover"],
-            border_width=2,
-            border_color=COLORS["button"] if is_active else "#2A2A3A",
-            command=command
-        )
-
-    def set_active(self, active):
-        """Toggle the active state of the button"""
-        self.configure(
-            fg_color=COLORS["button"] if active else COLORS["sidebar"],
-            border_color=COLORS["button"] if active else "#2A2A3A"
-        )
 
 def setup_main_window(app):
     """Set up the main application window."""
@@ -80,11 +42,9 @@ def setup_main_window(app):
         border_color="#2A2A3A"
     )
     navigation_frame.grid(row=0, column=0, padx=15, pady=15, sticky="nsew")
-    navigation_frame.grid_rowconfigure(5, weight=1)  # Push everything up
-    navigation_frame.configure(width=200)  # Fixed width
-    navigation_frame.grid_propagate(False)  # Prevent resizing
-
-    # Center align all content in navigation frame
+    navigation_frame.grid_rowconfigure(5, weight=1)
+    navigation_frame.configure(width=200)
+    navigation_frame.grid_propagate(False)
     navigation_frame.grid_columnconfigure(0, weight=1)
 
     # Title centered
@@ -100,34 +60,7 @@ def setup_main_window(app):
     )
     title_label.grid(row=0, column=0)
 
-    # Language Flag Buttons
-    lang_frame = customtkinter.CTkFrame(navigation_frame, fg_color="transparent")
-    lang_frame.grid(row=1, column=0, padx=20, pady=30, sticky="ew")
-    lang_frame.grid_columnconfigure((0, 1), weight=1)
-
-    # Get image paths
-    image_dir = os.path.join(os.path.dirname(__file__), "images")
-    us_flag_path = os.path.join(image_dir, "us_flag.png")
-    es_flag_path = os.path.join(image_dir, "es_flag.png")
-    
-    # Create buttons
-    app.english_btn = SimpleCircularFlagButton(
-        lang_frame,
-        us_flag_path,
-        is_active=app.current_lang == "en",
-        command=lambda: handle_language_change("en", app)
-    )
-    app.english_btn.grid(row=0, column=0, padx=10)
-    
-    app.spanish_btn = SimpleCircularFlagButton(
-        lang_frame,
-        es_flag_path,
-        is_active=app.current_lang == "es",
-        command=lambda: handle_language_change("es", app)
-    )
-    app.spanish_btn.grid(row=0, column=1, padx=10)
-
-    # Text Scale Section with proper margins
+    # Text Scale Section
     scale_frame = customtkinter.CTkFrame(navigation_frame, fg_color="transparent")
     scale_frame.grid(row=3, column=0, sticky="ew", pady=20)
     scale_frame.grid_columnconfigure(0, weight=1)
@@ -222,9 +155,3 @@ def setup_main_window(app):
         "navigation_frame": navigation_frame,
         "main_frame": main_frame
     }
-
-def handle_language_change(lang, app):
-    """Handle language change and button states"""
-    app.english_btn.set_active(lang == "en")
-    app.spanish_btn.set_active(lang == "es")
-    switch_language(lang, app)
