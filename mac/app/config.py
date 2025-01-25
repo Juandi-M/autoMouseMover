@@ -16,16 +16,16 @@ THREAD_TIMEOUT = 1.0
 # UI Elements
 FLAG_URLS = {
     "us": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/32px-Flag_of_the_United_States.svg.png",
-    "spain": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/32px-Flag_of_Spain.svg.png"
+    "spain": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/32px-Flag_of_Spain.svg.png",
 }
 
 # File Paths
-BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-LANG_PATH = os.path.join(BASE_PATH, 'mac', 'app', 'lang')
-LOG_DIR = os.path.join(BASE_PATH, 'logs')
-LOG_FILE = os.path.join(LOG_DIR, 'mouse_mover.log')
-LOG_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
+BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+LANG_PATH = os.path.join(BASE_PATH, "mac", "app", "lang")
+LOG_DIR = os.path.join(BASE_PATH, "logs")
+LOG_FILE = os.path.join(LOG_DIR, "mouse_mover.log")
+LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 # Internal Scripts
-INTERNAL_DIR = os.path.join(BASE_PATH, 'mac', 'scripts')
-CAFFEINATE_SCRIPT = os.path.join(INTERNAL_DIR, 'install_caffeinate.sh')
+INTERNAL_DIR = os.path.join(BASE_PATH, "mac", "scripts")
+CAFFEINATE_SCRIPT = os.path.join(INTERNAL_DIR, "install_caffeinate.sh")

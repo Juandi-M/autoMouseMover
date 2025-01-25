@@ -12,32 +12,29 @@ from app.state_manager import AppState
 def init_logger():
     """Initialize the application logger."""
     os.makedirs(LOG_DIR, exist_ok=True)
-    
+
     logging.basicConfig(
         level=logging.DEBUG,
         format=LOG_FORMAT,
-        handlers=[
-            logging.FileHandler(LOG_FILE),
-            logging.StreamHandler(sys.stdout)
-        ]
+        handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler(sys.stdout)],
     )
-    
+
     logging.info("Logger initialized")
     logging.info(f"Log file: {LOG_FILE}")
 
 
 def load_language(lang_code):
     """Load language strings from module."""
-    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    lang_path = os.path.join(base_path, 'lang', f'lang_{lang_code}.py')
-    
+    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    lang_path = os.path.join(base_path, "lang", f"lang_{lang_code}.py")
+
     if not os.path.exists(lang_path):
-        lang_path = os.path.join(LANG_PATH, f'lang_{lang_code}.py')
-    
+        lang_path = os.path.join(LANG_PATH, f"lang_{lang_code}.py")
+
     if not os.path.exists(lang_path):
         raise FileNotFoundError(f"Language file not found: {lang_path}")
 
-    spec = importlib.util.spec_from_file_location(f'lang_{lang_code}', lang_path)
+    spec = importlib.util.spec_from_file_location(f"lang_{lang_code}", lang_path)
     lang_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(lang_module)
     return lang_module.languages
@@ -47,11 +44,12 @@ def switch_language(lang, app):
     """Switch the application language."""
     app.current_lang = lang
     app.languages = load_language(lang)
-    
+
     # Update button appearances using the new function from window_setup
     from app.ui.window_setup import update_language_buttons
+
     update_language_buttons(app, lang)
-    
+
     # Update all labels (only need to call this once)
     update_labels(app)
 
@@ -61,7 +59,7 @@ def update_labels(app):
     # Update button text
     app.start_button.configure(text=app.languages["start"])
     app.stop_button.configure(text=app.languages["stop"])
-    
+
     # Update button states based on app state
     if app.state_manager.current_state == AppState.RUNNING:
         app.start_button.configure(state="disabled")
@@ -69,7 +67,7 @@ def update_labels(app):
     else:
         app.start_button.configure(state="normal")
         app.stop_button.configure(state="disabled")
-    
+
     # Update status labels based on state
     if app.state_manager.current_state == AppState.STOPPED:
         app.text_var.set(app.languages["mouse_stopped"])
@@ -80,7 +78,9 @@ def update_labels(app):
             app.counter_var.set(app.languages["mouse_not_moved"])
             app.text_var.set(app.languages["press_start"])
         else:
-            app.counter_var.set(f"{app.languages['mouse_moved']} {app.mouse_move_count} {app.languages['times']}")
+            app.counter_var.set(
+                f"{app.languages['mouse_moved']} {app.mouse_move_count} {app.languages['times']}"
+            )
             app.text_var.set(app.languages["log_mouse_moved"])
 
     # Ensure UI is updated

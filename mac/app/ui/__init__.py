@@ -1,4 +1,4 @@
-#__init__.py
+# __init__.py
 from .main_window import MouseMoverApp
 
-__all__ = ['MouseMoverApp']
+__all__ = ["MouseMoverApp"]

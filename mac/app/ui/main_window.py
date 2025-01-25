@@ -39,12 +39,12 @@ class MouseMoverApp(customtkinter.CTk):
         self.time_var = None
         self.start_button = None
         self.stop_button = None
-        
+
         # Set up the main window and UI components
         self.root, self.ui_components = setup_main_window(self)
         # Configure window behavior
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
-        
+
     def change_move_interval(self, interval_str: str):
         """Change the mouse movement interval."""
         # Convert string to seconds
@@ -52,15 +52,15 @@ class MouseMoverApp(customtkinter.CTk):
             seconds = 60
         else:
             seconds = int(interval_str.split()[0])
-        
+
         self.move_interval = seconds
         logging.info(f"Changed move interval to {seconds} seconds")
-        
+
         # If currently running, restart the threads to apply new interval
         if self.state_manager.current_state == AppState.RUNNING:
             self.stop_moving()
             self.start_moving()
-        
+
     def change_appearance_mode_event(self, new_appearance_mode: str):
         """Change the appearance mode of the application."""
         customtkinter.set_appearance_mode(new_appearance_mode.lower())
@@ -102,7 +102,10 @@ class MouseMoverApp(customtkinter.CTk):
 
     def handle_minimize(self):
         """Handle window minimize event."""
-        if self.state_manager.current_state not in [AppState.SLEEPING, AppState.SHUTTING_DOWN]:
+        if self.state_manager.current_state not in [
+            AppState.SLEEPING,
+            AppState.SHUTTING_DOWN,
+        ]:
             self.state_manager.transition_to(AppState.MINIMIZED)
             logging.info("Application minimized")
 
