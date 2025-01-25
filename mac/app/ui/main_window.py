@@ -1,16 +1,21 @@
 import tkinter as tk
+import customtkinter
 import logging
-from .window_setup import setup_main_window
-from .thread_handlers import ThreadManager
+
 from app.state_manager import StateManager, AppState
 from app.event_handler import AppEventHandler
 from app.utils import load_language, update_labels
+from app.thread_manager import MouseMoverThreadManager  # Updated import
+from .window_setup import setup_main_window
 
-class MouseMoverApp:
+
+class MouseMoverApp(customtkinter.CTk):
     def __init__(self):
+        super().__init__()
+
         # Initialize core managers and state
         self.state_manager = StateManager()
-        self.thread_manager = ThreadManager(self)
+        self.thread_manager = MouseMoverThreadManager(self)  # Updated class name
         self.event_handler = AppEventHandler(self)
 
         # Initialize application state
@@ -19,16 +24,52 @@ class MouseMoverApp:
         self.mouse_move_count = 0
         self.caffeinate_process = None
 
-        # Create main window
+        # Configure the application appearance
+        self.title("Mouse Mover")
+        self.geometry("1100x580")
+
+        # Set default appearance
+        customtkinter.set_appearance_mode("dark")
+        customtkinter.set_default_color_theme("blue")
+
+        # Initialize UI variables
+        self.text_var = None
+        self.counter_var = None
+        self.time_var = None
+        self.start_button = None
+        self.stop_button = None
+
+        # Set up the main window and UI components
         self.root, self.ui_components = setup_main_window(self)
+
+        # Configure window behavior
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+    def change_appearance_mode_event(self, new_appearance_mode: str):
+        """Change the appearance mode of the application."""
+        customtkinter.set_appearance_mode(new_appearance_mode.lower())
+
+    def change_scaling_event(self, new_scaling: str):
+        """Change the UI scaling of the application."""
+        try:
+            new_scaling_float = float(new_scaling.replace("%", "")) / 100
+            customtkinter.set_widget_scaling(new_scaling_float)
+        except ValueError as e:
+            logging.error(f"Error changing scaling: {e}")
 
     def start_moving(self):
         """Start mouse movement."""
+        if not self.state_manager.can_transition_to(AppState.RUNNING):
+            return
         self.thread_manager.start_threads()
+        self.state_manager.transition_to(AppState.RUNNING)
+        update_labels(self)
 
     def stop_moving(self):
         """Stop mouse movement."""
-        self.thread_manager.stop_threads()
+        self.thread_manager.stop_all_threads()
+        self.state_manager.transition_to(AppState.STOPPED)
+        update_labels(self)
 
     def handle_system_sleep(self):
         """Handle system sleep event."""
@@ -60,13 +101,12 @@ class MouseMoverApp:
         logging.info("Application shutting down")
         self.state_manager.transition_to(AppState.SHUTTING_DOWN)
         self.stop_moving()
-        self.root.quit()
-        self.root.destroy()
+        self.quit()
 
     def run(self):
         """Run the application main loop."""
         try:
-            self.root.mainloop()
+            self.mainloop()
         except Exception as e:
             logging.critical(f"Unhandled exception in run(): {e}", exc_info=True)
             raise

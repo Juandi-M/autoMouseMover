@@ -1,6 +1,7 @@
 # mac/app/main.py
 import os
 import sys
+import customtkinter
 
 # Add the project root and mac directory to Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -16,6 +17,7 @@ import tkinter.messagebox
 from app.ui import MouseMoverApp
 from app.utils import init_logger
 from app.config import CAFFEINATE_SCRIPT, LOG_DIR, LOG_FILE
+from app.thread_manager import MouseMoverThreadManager as ThreadManager
 
 def ensure_log_directory():
     """Ensure the log directory exists."""
@@ -49,7 +51,15 @@ def run_install_script():
             logging.error(f"Script stderr: {e.stderr}")
     else:
         logging.warning(f"Caffeinate script not found at {CAFFEINATE_SCRIPT}")
-
+        
+def change_scaling_event(self, new_scaling: str):
+    """Change the UI scaling of the application."""
+    try:
+        new_scaling_float = float(new_scaling.replace("%", "")) / 100
+        customtkinter.set_widget_scaling(new_scaling_float)
+    except ValueError as e:
+        logging.error(f"Error changing scaling: {e}")
+        
 def main():
     # Ensure log directory exists BEFORE configuring logging
     ensure_log_directory()
