@@ -65,6 +65,8 @@ node_modules/
 
 # Environment files
 .env
+python -m venv venv
+pip install -r requirements.txt
 
 # macOS installer files
 AutoMouseMover.pkg 
